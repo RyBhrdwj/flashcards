@@ -5,9 +5,9 @@ import {
   Route,
   Navigate,
 } from "react-router-dom";
-import ClientPage from "../pages/client";
-import AdminPage from "../pages/admin";
-import Login from "../pages/login";
+import ClientPage from "./pages/client";
+import AdminPage from "./pages/admin";
+import Login from "./pages/login";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
