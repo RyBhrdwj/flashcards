@@ -5,7 +5,7 @@ class FlashcardController {
     this.flashCard = FlashCardModel;
   }
 
-  async get(req, res) {
+  get = async(req, res) => {
     try {
       const flashcards = await this.flashCard.findAll();
       res.json(flashcards);
@@ -14,7 +14,7 @@ class FlashcardController {
     }
   }
 
-  async create(req, res) {
+  create = async(req, res) => {
     const { question, answer } = req.body;
 
     try {
@@ -31,7 +31,7 @@ class FlashcardController {
     }
   }
 
-  async update(req, res) {
+  update = async(req, res) => {
     const { id } = req.params;
     const { question, answer } = req.body;
 
@@ -53,7 +53,7 @@ class FlashcardController {
     }
   }
 
-  async delete(req, res) {
+  delete = async(req, res) => {
     const { id } = req.params;
 
     try {
