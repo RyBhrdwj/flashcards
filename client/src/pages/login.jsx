@@ -1,51 +1,63 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useContext } from "react";
+import axios from "axios";
+import { useNavigate, Navigate } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
+import { BASE_URL } from "../apiConfig";
 
-const Login = ({ setIsAuthenticated }) => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+export default function LoginPage() {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  const { isAuthenticated, login } = useContext(AuthContext);
 
   const navigate = useNavigate();
 
-  const handleLogin = (e) => {
-    e.preventDefault();
-    
-    if (username === 'admin' && password === 'admin') {
-      setIsAuthenticated(true);
-      navigate('/admin');
-    } else {
-      alert('Invalid credentials');
+  const handleLogin = async (event) => {
+    event.preventDefault();
+
+    try {
+      const response = await axios.post(`${BASE_URL}/admin`, {
+        username,
+        password,
+      });
+
+      login(response.data.token);
+
+      navigate("/admin");
+    } catch (error) {
+      console.error("Login failed", error);
     }
   };
 
+  // Redirect to AdminPage if user is already authenticated
+  if (isAuthenticated) {
+    return <Navigate to="/admin" />;
+  }
+
   return (
-    <div className="flex items-center justify-center h-screen">
-      <form onSubmit={handleLogin} className="p-4 bg-gray-200 rounded shadow-md">
-        <h2 className="text-2xl mb-4">Admin Login</h2>
+    <div>
+      <h1>Admin Login</h1>
+      <form onSubmit={handleLogin}>
         <div>
+          <label>Username:</label>
           <input
             type="text"
-            placeholder="Username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
-            className="mb-2 p-2 border border-gray-300 rounded"
+            required
           />
         </div>
         <div>
+          <label>Password:</label>
           <input
             type="password"
-            placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="mb-4 p-2 border border-gray-300 rounded"
+            required
           />
         </div>
-        <button type="submit" className="p-2 bg-blue-500 text-white rounded">
-          Login
-        </button>
+        <button type="submit">Login</button>
       </form>
     </div>
   );
-};
-
-export default Login;
+}

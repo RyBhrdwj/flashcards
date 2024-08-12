@@ -1,11 +1,18 @@
-import React from "react";
+import React, { useContext } from "react";
+import { AuthContext } from "../context/AuthContext";
 
-const AdminPage = () => {
+export default function AdminPage() {
+  const { logout } = useContext(AuthContext);
+
+  const handleLogout = () => {
+    logout();
+    window.location.href = "/login";
+  };
+
   return (
-    <div className="flex items-center justify-center h-screen">
-      <h1 className="text-4xl">Admin Dashboard</h1>
+    <div>
+      <h2>Admin Page</h2>
+      <button onClick={handleLogout}>Logout</button>
     </div>
   );
-};
-
-export default AdminPage;
+}
