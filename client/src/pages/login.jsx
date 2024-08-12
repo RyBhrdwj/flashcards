@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import axios from "axios";
 import { useNavigate, Navigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
+import { motion } from "framer-motion";
 import FormInput from "../components/FormInput";
 import { BASE_URL } from "../apiConfig";
 
@@ -39,7 +40,10 @@ export default function LoginPage() {
     <div className="flex h-[100%] items-center justify-center">
       <div className="flex h-[75%] w-[95%] flex-col items-center justify-center rounded border-blue-600 bg-zinc-900 sm:h-[80%] sm:w-[70%]">
         <h1 className="mb-10 text-3xl font-semibold">ADMIN LOGIN</h1>
-        <form onSubmit={handleLogin} className="flex flex-col gap-7 text-xl">
+        <form
+          onSubmit={handleLogin}
+          className="flex flex-col items-center gap-7 text-xl"
+        >
           <FormInput
             label="Username"
             type="text"
@@ -52,12 +56,23 @@ export default function LoginPage() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <button className="rounded-full bg-blue-600 px-8 py-2" type="submit">
+          <motion.button
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            className="rounded-full bg-blue-600 px-24 py-2 text-2xl"
+            type="submit"
+          >
             Login
-          </button>
-          <p className="animate-pulse text-xl font-bold text-blue-300">
+          </motion.button>
+          <p className="animate-pulse text-center text-xl font-bold text-blue-300">
             Note: Username & Password is "admin"
           </p>
+          <button
+            className="mt-4 w-fit border-b border-b-blue-200 p-2 text-blue-200 hover:text-blue-400"
+            onClick={() => navigate("/")}
+          >
+            Not an admin? Go back
+          </button>
         </form>
       </div>
     </div>
