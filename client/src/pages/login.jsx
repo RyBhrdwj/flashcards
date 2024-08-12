@@ -38,11 +38,11 @@ export default function LoginPage() {
 
   return (
     <div className="flex h-[100%] items-center justify-center">
-      <div className="flex h-[75%] w-[95%] flex-col items-center justify-center rounded border-blue-600 bg-zinc-900 sm:h-[80%] sm:w-[70%]">
+      <div className="flex h-[85%] w-[95%] flex-col items-center justify-center rounded border-blue-600 bg-zinc-900 p-10 sm:h-[32rem] sm:w-[45rem]">
         <h1 className="mb-10 text-3xl font-semibold">ADMIN LOGIN</h1>
         <form
           onSubmit={handleLogin}
-          className="flex flex-col items-center gap-7 text-xl"
+          className="flex flex-col items-center gap-6 text-xl"
         >
           <FormInput
             label="Username"

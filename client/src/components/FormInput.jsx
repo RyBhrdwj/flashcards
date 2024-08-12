@@ -14,7 +14,7 @@ export default function FormInput({
         name={name}
         value={value}
         onChange={onChange}
-        className={`peer block w-full appearance-none rounded-md border-0 border-b-[2px] bg-transparent px-1 py-2.5 text-xl text-gray-600 hover:border-white focus:border-blue-100 focus:outline-none focus:ring-0 ${
+        className={`peer block w-full appearance-none rounded-md border-0 border-b-[2px] bg-transparent px-1 py-2.5 text-xl text-gray-200 hover:border-white focus:border-blue-100 focus:outline-none focus:ring-0 ${
           disabled ? "border-gray-400" : "border-gray-500"
         }`}
         placeholder=" "
