@@ -2,8 +2,8 @@ const express = require("express");
 const dotenv = require("dotenv");
 const bodyParser = require("body-parser");
 const sequelize = require("./config/database");
+const cors = require("cors");
 const cookieParser = require('cookie-parser');
-
 
 dotenv.config();
 
@@ -13,6 +13,7 @@ const adminRouter = require("./routes/adminRoutes");
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+app.use(cors());
 app.use(bodyParser.json());
 app.use(cookieParser());
 
