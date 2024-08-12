@@ -10,7 +10,6 @@ export const AuthProvider = ({ children }) => {
     const token = localStorage.getItem("token");
 
     if (token) {
-      // Optionally verify the token by making a request to your backend here
       setIsAuthenticated(true);
     }
 
