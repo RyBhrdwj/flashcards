@@ -1,34 +1,28 @@
-import React, { useState } from "react";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Navigate,
-} from "react-router-dom";
-import ClientPage from "./pages/client";
-import AdminPage from "./pages/admin";
-import Login from "./pages/login";
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import ProtectedRoute from './components/ProtectedRoute';
+import LoginPage from './pages/login';
+import AdminPage from './pages/admin';
+import HomePage from './pages/home';
 
-function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-
+const App = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<ClientPage />} />
-        <Route
-          path="/login"
-          element={<Login setIsAuthenticated={setIsAuthenticated} />}
-        />
+        <Route path="/login" element={<LoginPage />} />
         <Route
           path="/admin"
           element={
-            isAuthenticated ? <AdminPage /> : <Navigate to="/login" replace />
+            <ProtectedRoute>
+              <AdminPage />
+            </ProtectedRoute>
           }
         />
+        <Route path="/" element={<HomePage />} />
+        <Route path="*" element={<Navigate to="/" />} /> {/* Handle unknown routes */}
       </Routes>
     </Router>
   );
-}
+};
 
 export default App;
