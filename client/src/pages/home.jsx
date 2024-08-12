@@ -9,7 +9,13 @@ export default function HomePage() {
   const [isFlipped, setIsFlipped] = useState(false);
   const navigate = useNavigate();
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) {
+    return (
+      <div className="text-xl">
+        Loading... The backend might be experiencing a cold start.
+      </div>
+    );
+  }
 
   const handleNext = () => {
     setIsFlipped(false);
@@ -18,38 +24,36 @@ export default function HomePage() {
 
   const handlePrev = () => {
     setIsFlipped(false);
-    setCurrentCard((prev) =>
-      prev === 0 ? questions.length - 1 : prev - 1
-    );
+    setCurrentCard((prev) => (prev === 0 ? questions.length - 1 : prev - 1));
   };
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen bg-zinc-800">
-      <nav className="w-full absolute top-0 flex justify-between items-center p-4 bg-zinc-900 shadow-md">
+    <div className="flex h-screen flex-col items-center justify-center bg-zinc-800">
+      <nav className="absolute top-0 flex w-full items-center justify-between bg-zinc-900 p-4 border-b border-gray-700">
         <motion.div
-          className="text-xl text-white font-bold"
+          className="text-3xl font-bold text-white"
           whileHover={{ color: "#3b82f6" }}
         >
           FlashDash
         </motion.div>
         <button
           onClick={() => navigate("/login")}
-          className="text-white bg-blue-500 px-4 py-2 rounded-lg"
+          className="rounded-lg bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
         >
           Admin Login
         </button>
       </nav>
 
-      <div className="relative w-full max-w-4xl p-4 flex items-center">
+      <div className="relative flex w-full max-w-4xl items-center p-4">
         <button
           onClick={handlePrev}
-          className="px-4 py-2 bg-blue-500 text-white rounded-lg"
+          className="rounded-lg bg-blue-500 px-4 py-2 text-white"
         >
           Prev
         </button>
 
         <motion.div
-          className="relative mx-4 w-full h-[70vh] bg-zinc-900 shadow-lg rounded-lg"
+          className="relative mx-4 h-[70vh] w-full rounded-lg bg-zinc-900 shadow-lg"
           onClick={() => setIsFlipped(!isFlipped)}
           initial={{ rotateY: 0 }}
           animate={{ rotateY: isFlipped ? 180 : 0 }}
@@ -57,14 +61,14 @@ export default function HomePage() {
           style={{ perspective: 1000 }}
         >
           <div
-            className={`absolute w-full h-full flex items-center justify-center p-4 text-xl text-center font-semibold rounded-lg backface-hidden ${
+            className={`backface-hidden absolute flex h-full w-full items-center justify-center rounded-lg p-4 text-center text-xl font-semibold ${
               isFlipped ? "opacity-0" : "opacity-100"
             }`}
           >
             <p>Q: {questions[currentCard].question}</p>
           </div>
           <div
-            className={`absolute w-full h-full flex items-center justify-center p-4 text-xl text-center font-semibold rounded-lg backface-hidden transform rotateY-180 ${
+            className={`backface-hidden rotateY-180 absolute flex h-full w-full transform items-center justify-center rounded-lg p-4 text-center text-xl font-semibold ${
               isFlipped ? "opacity-100" : "opacity-0"
             }`}
             style={{ transform: "rotateY(180deg)" }}
@@ -75,7 +79,7 @@ export default function HomePage() {
 
         <button
           onClick={handleNext}
-          className="px-4 py-2 bg-blue-500 text-white rounded-lg"
+          className="rounded-lg bg-blue-500 px-4 py-2 text-white"
         >
           Next
         </button>
