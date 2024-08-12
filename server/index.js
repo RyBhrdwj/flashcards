@@ -1,11 +1,9 @@
 const express = require("express");
-const dotenv = require("dotenv");
+require("dotenv").config();
 const bodyParser = require("body-parser");
 const sequelize = require("./config/database");
 const cors = require("cors");
 const cookieParser = require('cookie-parser');
-
-dotenv.config();
 
 const flashcardRouter = require("./routes/flashcardRoutes");
 const adminRouter = require("./routes/adminRoutes");
