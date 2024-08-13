@@ -18,7 +18,7 @@ const Tile = ({ question, onDelete, onUpdate }) => {
             type="text"
             value={updatedQuestion}
             onChange={(e) => setUpdatedQuestion(e.target.value)}
-            className="mb-2 border p-2"
+            className="mb-2 w-full border p-2"
           />
           <textarea
             value={updatedAnswer}
