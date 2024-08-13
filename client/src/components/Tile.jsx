@@ -45,7 +45,7 @@ const Tile = ({ question, onDelete, onUpdate, isCreating = false }) => {
         <div className="flex items-center justify-between text-xl">
           <div className="flex flex-1 flex-col overflow-hidden">
             <p className="truncate text-sm md:text-xl">Q: {question.question}</p>
-            <p className="truncate text-sm md:text-xl`">A: {question.answer}</p>
+            <p className="truncate text-sm md:text-xl">A: {question.answer}</p>
           </div>
 
           <div className="ml-auto flex gap-1 text-sm md:gap-2 md:text-xl">
